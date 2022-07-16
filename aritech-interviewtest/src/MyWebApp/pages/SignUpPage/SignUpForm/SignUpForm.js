@@ -1,5 +1,5 @@
 import { Button, Input } from "antd";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { withFormik } from "formik";
 import { useSelector } from "react-redux";
 import swal from "sweetalert";
@@ -10,12 +10,15 @@ function SignUpForm(props) {
   let userDefault = useSelector((state) => state.signUpSlice.userDefault);
   const { values, touched, errors, handleChange, handleBlur, handleSubmit } =
     props;
+  let inputRef = useRef();
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
   useEffect(() => {
     if (values.name === userDefault.name) {
       Object.assign(values, { ...userDefault });
     }
   }, [values.name]);
-
   return (
     <div className="container px-5 mt-5 h-full">
       <form onSubmit={handleSubmit} onBlur={handleBlur} name="basic">
@@ -32,6 +35,7 @@ function SignUpForm(props) {
               onChange={handleChange}
               placeholder="Your name"
               value={values.name}
+              ref={inputRef}
             />
             {errors.name && touched.name && (
               <div className=" text-red-500">{errors.name}</div>
@@ -102,7 +106,11 @@ function SignUpForm(props) {
           )}
         </div>
         <div>
-          <Button className="w-full mb-5" type="primary" htmlType="submit">
+          <Button
+            className="w-full mb-5 rounded"
+            type="primary"
+            htmlType="submit"
+          >
             Submit
           </Button>
         </div>

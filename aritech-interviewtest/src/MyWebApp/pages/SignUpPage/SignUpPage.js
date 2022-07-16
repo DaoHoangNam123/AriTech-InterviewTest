@@ -4,7 +4,7 @@ import SignUpForm from "./SignUpForm/SignUpForm";
 export default function SignUpPage() {
   return (
     <div
-      className="container mx-auto my-5 p-5"
+      className="container mx-auto my-5 p-5 rounded-xl"
       style={{ backgroundColor: "#06283D" }}
     >
       <h1 className="flex items-center text-left text-3xl font-bold border-b-2 pb-5 text-white">
