@@ -5,9 +5,11 @@ import { useSelector } from "react-redux";
 import swal from "sweetalert";
 import * as Yup from "yup";
 import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function SignUpForm(props) {
   let userDefault = useSelector((state) => state.signUpSlice.userDefault);
+  let navigate = useNavigate();
   const { values, touched, errors, handleChange, handleBlur, handleSubmit } =
     props;
   let inputRef = useRef();
@@ -107,12 +109,23 @@ function SignUpForm(props) {
         </div>
         <div>
           <Button
-            className="w-full mb-5 rounded"
+            className="w-full mb-2 rounded"
             type="primary"
             htmlType="submit"
           >
             Submit
           </Button>
+        </div>
+        <div className="mb-5">
+          <span>Already have an account?</span>
+          <span
+            className="mx-2 text-blue-500 hover:text-blue-700 cursor-pointer"
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            Login Now!
+          </span>
         </div>
       </form>
     </div>
